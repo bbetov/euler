@@ -1,7 +1,6 @@
 package shared
 
 import (
-	"fmt"
 	"math/big"
 
 	"github.com/bbetov/euler/shared/BitSet"
@@ -61,6 +60,7 @@ const (
 	sieveSize uint32 = 10000000
 )
 
+//GetPrimesInt64 returns a list of prime numbers smaller than maxPrime
 func GetPrimesInt64(maxPrime uint64) []uint64 {
 	segSize := uint64(sieveSize)
 	if segSize > maxPrime {
@@ -83,11 +83,7 @@ func GetPrimesInt64(maxPrime uint64) []uint64 {
 		}
 	}
 
-	iter := uint64(1)
-	numIters := 1 + maxPrime/segSize
 	for offset := segSize; offset < maxPrime; offset += segSize {
-		fmt.Printf("Progress: %d/%d [%d]\n", iter, numIters, len(primes))
-		iter++
 		smallPrimes.Reset(true)
 		for _, p := range primes {
 			r := offset % p
@@ -105,4 +101,50 @@ func GetPrimesInt64(maxPrime uint64) []uint64 {
 		}
 	}
 	return primes
+}
+
+//GetPrimeInt64 returns the N-th prime number
+func GetPrimeInt64(N int) uint64 {
+	N--
+	segSize := uint64(sieveSize)
+
+	smallPrimes := BitSet.New(uint32(segSize), true)
+	for i := uint64(2); i*i < segSize; i++ {
+		if smallPrimes.IsSet(uint32(i)) {
+			for j := i * i; j <= segSize; j += i {
+				smallPrimes.Set(uint32(j), false)
+			}
+		}
+	}
+
+	var primes []uint64
+	for i := uint32(2); i < uint32(segSize); i++ {
+		if smallPrimes.IsSet(i) {
+			primes = append(primes, uint64(i))
+		}
+	}
+
+	if N < len(primes) {
+		return primes[N]
+	}
+
+	for offset := segSize; N > len(primes); offset += segSize {
+		smallPrimes.Reset(true)
+		for _, p := range primes {
+			r := offset % p
+			if r > 0 {
+				r = p - r
+			}
+			for i := r; i < segSize; i += p {
+				smallPrimes.Set(uint32(i), false)
+			}
+		}
+		for i := uint64(0); i < segSize; i++ {
+			if smallPrimes.IsSet(uint32(i)) {
+				primes = append(primes, offset+uint64(i))
+			}
+		}
+	}
+
+	return primes[N]
 }
