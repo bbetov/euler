@@ -9,8 +9,9 @@ package main
 
 func fibEven(c chan int64, br int64) {
 	x, y := int64(1), int64(1)
-	for y <= br {
-		if y%int64(2) == 0 {
+	two := int64(2)
+	for y < br {
+		if y%two == 0 {
 			c <- y
 		}
 		x, y = y, x+y
@@ -20,7 +21,7 @@ func fibEven(c chan int64, br int64) {
 
 func main() {
 	c := make(chan int64, 1)
-	go fibEven(c, 1000000)
+	go fibEven(c, 4000000)
 	var total int64
 	for i := range c {
 		total += i

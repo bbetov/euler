@@ -7,7 +7,7 @@ type triple struct {
 }
 
 func pitTripleGen() (ch chan triple) {
-	ch = make(chan Triple)
+	ch = make(chan triple)
 
 	go func() {
 		for a := 2; a < 1000; a++ {

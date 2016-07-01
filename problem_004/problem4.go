@@ -1,7 +1,5 @@
 package main
 
-import "math"
-
 // A palindromic number reads the same both ways. The largest palindrome made
 // from the product of two 2-digit numbers is 9009 = 91 × 99.
 // Find the largest palindrome made from the product of two 3-digit numbers.
@@ -12,34 +10,13 @@ func isPalindrome(num int) bool {
 	}
 
 	number := num
-	numDigits := 0
-
-	for number != 0 {
+	var n int
+	for number > 0 {
+		n = 10*n + number%10
 		number /= 10
-		numDigits++
 	}
 
-	if numDigits < 2 {
-		return true
-	}
-
-	upperBound := numDigits / 2
-	firstDigitDivisor := int(math.Pow10(numDigits - 1))
-
-	for i := 1; i <= upperBound; i++ {
-		lastDigit := num % 10
-		firstDigit := num - num%firstDigitDivisor
-
-		if lastDigit*firstDigitDivisor != firstDigit {
-			return false
-		}
-
-		numDigits -= 2
-		num -= firstDigit
-		num /= 10
-		firstDigitDivisor /= 100
-	}
-	return true
+	return n == num
 }
 
 func main() {
