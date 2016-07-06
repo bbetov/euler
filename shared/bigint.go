@@ -46,6 +46,7 @@ func (ii *Integer) Add(a *Integer) {
 }
 
 func (ii *Integer) Set(s string) {
+	ii.digits = []byte{}
 	for i := len(s) - 1; i >= 0; i-- {
 		n, _ := strconv.Atoi(string(s[i]))
 		ii.digits = append(ii.digits, byte(n))
@@ -65,5 +66,27 @@ func (ii *Integer) Norm() {
 			ii.digits = ii.digits[:i+1]
 			return
 		}
+	}
+}
+
+func (ii *Integer) Multiply(m *Integer) {
+	// Will start with a very simple multiplication and then improve
+	curr := ii.digits
+	ii.digits = []byte{}
+	tmpi := Integer{}
+	for i, v := range m.digits {
+		tmp := make([]byte, i)
+		carry := byte(0)
+		for _, p := range curr {
+			t := p*v + carry
+			carry = t / 10
+			t = t % 10
+			tmp = append(tmp, t)
+		}
+		if carry > 0 {
+			tmp = append(tmp, carry)
+		}
+		tmpi.digits = tmp
+		ii.Add(&tmpi)
 	}
 }
