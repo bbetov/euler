@@ -62,13 +62,19 @@ const (
 
 //GetPrimesInt64 returns a list of prime numbers smaller than maxPrime
 func GetPrimesInt64(maxPrime uint64) []uint64 {
+	if maxPrime == 2 {
+		return []uint64{2}
+	}
+	if maxPrime == 3 {
+		return []uint64{2, 3}
+	}
 	segSize := uint64(sieveSize)
 	if segSize > maxPrime {
 		segSize = maxPrime
 	}
 
-	smallPrimes := BitSet.New(uint32(segSize), true)
-	for i := uint64(2); i*i < segSize; i++ {
+	smallPrimes := BitSet.New(uint32(segSize+1), true)
+	for i := uint64(2); i*i <= segSize; i++ {
 		if smallPrimes.IsSet(uint32(i)) {
 			for j := i * i; j <= segSize; j += i {
 				smallPrimes.Set(uint32(j), false)
@@ -77,7 +83,7 @@ func GetPrimesInt64(maxPrime uint64) []uint64 {
 	}
 
 	var primes []uint64
-	for i := uint32(2); i < uint32(segSize); i++ {
+	for i := uint32(2); i <= uint32(segSize); i++ {
 		if smallPrimes.IsSet(i) {
 			primes = append(primes, uint64(i))
 		}
