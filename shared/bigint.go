@@ -53,6 +53,14 @@ func (ii *Integer) Set(s string) {
 	}
 }
 
+func (ii *Integer) Swap(i *Integer) {
+	ii.digits, i.digits = i.digits, ii.digits
+}
+
+func (ii *Integer) NumDigits() int {
+	return len(ii.digits)
+}
+
 func (ii *Integer) String() (s string) {
 	for i := len(ii.digits) - 1; i >= 0; i-- {
 		s += strconv.Itoa(int(ii.digits[i]))
