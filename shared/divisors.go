@@ -1,21 +1,27 @@
 package shared
 
-func GetDivisorsSum(n uint64) (s uint64) {
-	if n == 1 {
-		return 1
-	}
+func GetDivisorsFreq(n uint64) (s map[uint64]int) {
 	primes := GetPrimesInt64(n)
 
 	// find the prime divisors
-	pds := make(map[uint64]int)
+	s = make(map[uint64]int)
 	for _, v := range primes {
 		tmp := n
 		for tmp%v == 0 {
-			pds[v]++
+			s[v]++
 			tmp /= v
 		}
 	}
 	//fmt.Printf("> %d ==> %v\n", n, pds)
+	return s
+}
+
+func GetDivisorsSum(n uint64) (s uint64) {
+	if n == 1 {
+		return 1
+	}
+	// find the prime divisors
+	pds := GetDivisorsFreq(n)
 
 	dvs := []uint64{1}
 	for k, v := range pds {
