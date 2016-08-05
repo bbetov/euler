@@ -1,3 +1,6 @@
-Having fun with Project Euler. 
+Project Euler in Go
+===================
 
-I am attempting to learn go language via implementing Project Euler problems.
+I've decided to kill two birds with one stone (in my spare time) and have fun solving some problems from [Project Euler](https://projecteuler.net) and learn Go at the same time. This should be a win-win situation :-)
+
+As I learn more, I hope the solutions become more idiomatic. Use at your own risk!
