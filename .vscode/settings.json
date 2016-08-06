@@ -1,0 +1,11 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+
+    "go.gopath": null,
+
+    // Specifies the GOROOT to use when no environment variable is set.
+    "go.goroot": null,
+    // Enable gocode's autobuild feature
+    "go.gocodeAutoBuild": false
+
+}
