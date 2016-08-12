@@ -9,9 +9,13 @@ type bitSet struct {
 	storage []uint64
 }
 
+// BitSet is simply an array of booleans packed as uint64 numbers (i.e. 64 bits per elements)
 type BitSet interface {
+	// Set sets/unsets a specific bit at a position which. Resizes if necessary.
 	Set(which uint32, val bool)
+	// Reset resets all bits in the array to either 1 or 0 based on val
 	Reset(val bool)
+	// IsSet checks if the bit at position which is set
 	IsSet(which uint32) bool
 }
 
@@ -40,6 +44,7 @@ func (b *bitSet) IsSet(which uint32) bool {
 	return (b.storage[bn] & (uint64(1) << whichBit)) > 0
 }
 
+// New creates a BitSet with a specific size (numbits) and sets them to a value
 func New(numbits uint32, value bool) BitSet {
 	bn := numbits / 64
 	bs := &bitSet{storage: make([]uint64, bn+1)}

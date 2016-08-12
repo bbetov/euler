@@ -9,9 +9,10 @@ import (
 
 func main() {
 	abundant := make(map[int]bool)
+	primes := shared.GetPrimesUInt64(28123)
 	var ab []int
 	for i := 12; i <= 28123; i++ {
-		s := shared.GetDivisorsSum(uint64(i))
+		s := shared.GetDivisorsSumPrimesSet(uint64(i), primes)
 		if int(s) > i {
 			abundant[i] = true
 			ab = append(ab, i)

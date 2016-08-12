@@ -15,9 +15,10 @@ import (
 func main() {
 	maxNum := 1000
 	maxSeq, numForMaxSeq := 0, 0
+	primes := shared.GetPrimesUInt64(uint64(maxNum))
 	for i := 12; i <= maxNum; i++ {
 		t := i
-		m := shared.GetDivisorsFreq(uint64(t))
+		m := shared.GetDivisorsFreqPrimesSet(uint64(t), primes)
 		times2, has2 := m[uint64(2)]
 		times5, has5 := m[uint64(5)]
 

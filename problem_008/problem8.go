@@ -27,7 +27,7 @@ func readInput(path string) ([]int, error) {
 
 func main() {
 	nums, _ := readInput("input.txt")
-	println(len(nums))
+	//println(len(nums))
 	var s int
 	for h := 12; h < len(nums); h++ {
 		cs := 1

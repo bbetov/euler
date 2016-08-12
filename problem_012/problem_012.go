@@ -17,7 +17,7 @@ func main() {
 		}
 		if divcnt > 500 {
 			println(tn)
-			println(divcnt)
+			//println(divcnt)
 			break
 		}
 		num++

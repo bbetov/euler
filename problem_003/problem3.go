@@ -13,7 +13,7 @@ import (
 func main() {
 	limit := uint64(600851475143)
 	lp := shared.SqrtUInt64(limit)
-	primes := shared.GetPrimesInt64(lp)
+	primes := shared.GetPrimesUInt64(lp)
 	maxDiv := uint64(0)
 	for _, p := range primes {
 		if limit%p == uint64(0) && maxDiv < p {

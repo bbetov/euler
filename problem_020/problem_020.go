@@ -16,5 +16,5 @@ func main() {
 		r.Multiply(&tmp)
 	}
 	println(r.SumDigits())
-	println(r.String())
+	//println(r.String())
 }

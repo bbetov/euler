@@ -35,7 +35,7 @@ func checkCircular(p int, m map[int]bool) bool {
 
 func main() {
 	// get all primes up to 1M
-	p := shared.GetPrimesInt64(uint64(1000001))
+	p := shared.GetPrimesUInt64(uint64(1000001))
 	m := make(map[int]bool)
 	var cnt int
 	for _, v := range p {

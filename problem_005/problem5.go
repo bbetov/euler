@@ -20,7 +20,7 @@ func factorize(num int, primes []uint64) map[int]int {
 }
 
 func evenlyDivisible(maxNum int) int {
-	primes := shared.GetPrimesInt64(uint64(maxNum))
+	primes := shared.GetPrimesUInt64(uint64(maxNum))
 	nums := make(map[int]int)
 	for i := maxNum; i > 0; i-- {
 		f := factorize(i, primes)

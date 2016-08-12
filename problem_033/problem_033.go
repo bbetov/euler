@@ -6,6 +6,8 @@ import (
 	"github.com/bbetov/euler/shared"
 )
 
+var primes = shared.GetPrimesUInt64(uint64(100))
+
 func minInt(a, b int) int {
 	if a < b {
 		return a
@@ -14,8 +16,8 @@ func minInt(a, b int) int {
 }
 
 func simplify(n, d int) (fn, fd int) {
-	mn := shared.GetDivisorsFreq(uint64(n))
-	md := shared.GetDivisorsFreq(uint64(d))
+	mn := shared.GetDivisorsFreqPrimesSet(uint64(n), primes)
+	md := shared.GetDivisorsFreqPrimesSet(uint64(d), primes)
 	for nk, nv := range mn {
 		if dv, ok := md[nk]; ok {
 			tmp := minInt(nv, dv)

@@ -74,8 +74,9 @@ func process(i int) int {
 
 func main() {
 	// 1. Get all prime decompositions 2 - 100
+	primes := shared.GetPrimesUInt64(uint64(100))
 	for i := 2; i <= 100; i++ {
-		dv := shared.GetDivisorsFreq(uint64(i))
+		dv := shared.GetDivisorsFreqPrimesSet(uint64(i), primes)
 		pdc[i] = dv
 		//fmt.Printf("%v ==> %v\n", i, dv)
 	}

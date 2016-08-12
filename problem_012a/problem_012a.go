@@ -10,12 +10,12 @@ import (
 
 func main() {
 	num := uint64(1)
-	primes := shared.GetPrimesInt64(100000)
+	primes := shared.GetPrimesUInt64(100000)
 	for tn := uint64(1); ; tn += num {
 		divcnt := 2
 		sq := shared.SqrtUInt64(tn)
 		if sq > primes[len(primes)-1] {
-			primes = shared.GetPrimesInt64(sq * 10)
+			primes = shared.GetPrimesUInt64(sq * 10)
 		}
 		pd := make(map[uint64]int)
 		for _, pr := range primes {
@@ -37,7 +37,7 @@ func main() {
 		fmt.Printf("%d ==> %d \n", tn, divcnt)
 		if divcnt > 500 {
 			println(tn)
-			println(divcnt)
+			//println(divcnt)
 			break
 		}
 		num++

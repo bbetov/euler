@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestPrimes1M(t *testing.T) {
+func TestPrimes10K(t *testing.T) {
 	// Load test data
 	file, err := os.Open("10kPrimes.txt")
 	if err != nil {
@@ -26,7 +26,10 @@ func TestPrimes1M(t *testing.T) {
 	pr := NewPrimer()
 	cntr := 0
 	for cntr < len(p) {
-		np := pr.NextPrime()
+		np, err := pr.NextPrime()
+		if err != nil {
+			t.Errorf("Error %v.", err)
+		}
 		if _, ok := p[np]; !ok {
 			t.Errorf("Unexpected number %v.", np)
 		}

@@ -30,7 +30,7 @@ func consecutivePrimes(a, b int64) (np int) {
 // a (-1000, 1000)
 // n [0, ?]
 func main() {
-	p := shared.GetPrimesInt64(uint64(10000000))
+	p := shared.GetPrimesUInt64(uint64(10000000))
 	for _, tp := range p {
 		primes[tp] = false
 	}
