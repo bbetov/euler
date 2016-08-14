@@ -56,8 +56,8 @@ func (p *primer) fillNext() error {
 	return nil
 }
 
-func (p *primer) initialize() {
-	p.segSize = 32768
+func (p *primer) initialize(segSize uint32) {
+	p.segSize = segSize
 	p.segIndex = 1
 	p.primeIndex = -1
 	// Generate small primes
@@ -78,7 +78,14 @@ func (p *primer) initialize() {
 
 func NewPrimer() Primer {
 	p := &primer{}
-	p.initialize()
+	p.initialize(32768)
+
+	return p
+}
+
+func NewPrimerWithSegSize(segSize uint32) Primer {
+	p := &primer{}
+	p.initialize(segSize)
 
 	return p
 }
