@@ -1,54 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
-func isMobile(perm []int, dir []bool, index int) bool {
-	if dir[index] {
-		if index == len(dir)-1 || perm[index] < perm[index+1] {
-			return false
-		}
-	} else {
-		if index == 0 || perm[index] < perm[index-1] {
-			return false
-		}
-	}
-	return true
-}
-
-func nextPerm(perm []int, dir []bool) (p []int, d []bool) {
-	// Find largest mobile number
-	mobilePos := -1
-	var prevMobile int
-
-	//find the largest mobile integer k
-	for i := 0; i < len(perm); i++ {
-		if isMobile(perm, dir, i) {
-			if prevMobile < perm[i] {
-				mobilePos = i
-				prevMobile = perm[i]
-			}
-		}
-	}
-	if mobilePos < 0 {
-		return nil, nil
-	}
-
-	//swap k and the adjacent integer it is looking at
-	if dir[mobilePos] {
-		perm[mobilePos], perm[mobilePos+1] = perm[mobilePos+1], perm[mobilePos]
-		dir[mobilePos], dir[mobilePos+1] = dir[mobilePos+1], dir[mobilePos]
-	} else {
-		perm[mobilePos], perm[mobilePos-1] = perm[mobilePos-1], perm[mobilePos]
-		dir[mobilePos], dir[mobilePos-1] = dir[mobilePos-1], dir[mobilePos]
-	}
-	//reverse the direction of all integers larger than k
-	for i := 0; i < len(perm); i++ {
-		if perm[i] > prevMobile {
-			dir[i] = !dir[i]
-		}
-	}
-	return perm, dir
-}
+	"github.com/bbetov/euler/shared"
+)
 
 func getNum(s []int) (n int) {
 	mul := 1
@@ -112,8 +68,6 @@ func processPermutation(perm []int) (mul int, ok bool) {
 
 func main() {
 	perm := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-	// true to the right, false to the left
-	dir := []bool{false, false, false, false, false, false, false, false, false}
 
 	/* tests
 	pp, oo := processPermutation([]int{1, 9, 2, 3, 8, 4, 5, 7, 6})
@@ -122,7 +76,10 @@ func main() {
 	fmt.Printf("%v, %v\n", pp, oo)
 	*/
 	maxNum, seed := 0, 0
-	for ; perm != nil; perm, dir = nextPerm(perm, dir) {
+	var ok bool
+	p := shared.NewPermutator(perm)
+	perm, _ = p.NextPerm()
+	for perm != nil {
 		//fmt.Printf("%v\n", perm)
 		if n, ok := processPermutation(perm); ok {
 			p := getNum(perm)
@@ -131,6 +88,10 @@ func main() {
 				maxNum = p
 				seed = n
 			}
+		}
+		perm, ok = p.NextPerm()
+		if !ok {
+			break
 		}
 	}
 	fmt.Printf("Max Found: %v, Seed: %v\n", maxNum, seed)
