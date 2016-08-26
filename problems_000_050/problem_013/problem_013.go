@@ -26,7 +26,7 @@ func loadData(path string) ([]string, error) {
 	return rv, scanner.Err()
 }
 
-func main() {
+func getLast10LargeSum() string {
 	lines, _ := loadData("input.txt")
 
 	i1 := shared.Integer{}
@@ -35,5 +35,9 @@ func main() {
 		i.Set(val)
 		i1.Add(&i)
 	}
-	println(i1.String()[:10])
+	return i1.String()[:10]
+}
+
+func main() {
+	println(getLast10LargeSum())
 }

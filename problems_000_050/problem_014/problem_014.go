@@ -15,14 +15,18 @@ func collatzLen(n int64) (l int64) {
 	return l
 }
 
-func main() {
-	var maxLen, maxSeed int64
+func getMaxCollatzSeq() (len, start int64) {
 	for i := int64(1); i < int64(1000000); i++ {
 		l := collatzLen(i)
-		if maxLen < l {
-			maxLen = l
-			maxSeed = i
+		if len < l {
+			len = l
+			start = i
 		}
 	}
+	return len, start
+}
+
+func main() {
+	maxLen, maxSeed := getMaxCollatzSeq()
 	fmt.Printf("Max: %d ==> %d\n", maxSeed, maxLen)
 }

@@ -62,18 +62,19 @@ func maxProduct(i, j int, arr [][]int) int {
 	return mp
 }
 
-func main() {
+func getMaxProduct() (m int) {
 	arr, _ := loadData("input.txt")
-	//println(len(arr))
-	max := 0
 	for i := 0; i < len(arr); i++ {
 		for j := 0; j < len(arr[i]); j++ {
 			mp := maxProduct(i, j, arr)
-			if max < mp {
-				max = mp
+			if m < mp {
+				m = mp
 			}
 		}
 	}
+	return m
+}
 
-	println(max)
+func main() {
+	println(getMaxProduct())
 }
