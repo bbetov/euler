@@ -3,7 +3,7 @@ package primer
 import (
 	"errors"
 
-	"github.com/bbetov/euler/shared/BitSet"
+	"github.com/bbetov/euler/shared/bitset"
 )
 
 type primer struct {
@@ -30,7 +30,7 @@ func (p *primer) NextPrime() (n uint64, err error) {
 }
 
 func (p *primer) fillNext() error {
-	b := BitSet.New(p.segSize+1, true)
+	b := bitset.New(p.segSize+1, true)
 	low := uint64(p.segIndex)*uint64(p.segSize) + 1
 	if maxUint64-uint64(p.segSize) < low {
 		return errors.New("At the end of the uint64 range")
@@ -61,7 +61,7 @@ func (p *primer) initialize(segSize uint32) {
 	p.segIndex = 1
 	p.primeIndex = -1
 	// Generate small primes
-	b := BitSet.New(p.segSize+1, true)
+	b := bitset.New(p.segSize+1, true)
 	for i := uint32(2); i*i <= p.segSize; i++ {
 		if b.IsSet(i) {
 			for j := i * i; j <= p.segSize; j += i {

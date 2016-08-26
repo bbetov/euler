@@ -1,4 +1,4 @@
-package BitSet
+package bitset
 
 const (
 	allBits uint64 = uint64(0xFFFFFFFFFFFFFFFF)
@@ -44,7 +44,7 @@ func (b *bitSet) IsSet(which uint32) bool {
 	return (b.storage[bn] & (uint64(1) << whichBit)) > 0
 }
 
-// New creates a BitSet with a specific size (numbits) and sets them to a value
+// New creates a BitSet with a specific size (numbits) and sets them to a specified value
 func New(numbits uint32, value bool) BitSet {
 	bn := numbits / 64
 	bs := &bitSet{storage: make([]uint64, bn+1)}

@@ -10,15 +10,18 @@ import (
 	"github.com/bbetov/euler/shared"
 )
 
-func main() {
-	limit := uint64(600851475143)
-	lp := shared.SqrtUInt64(limit)
+func getLargestPrimeFactor(n uint64) (maxDiv uint64) {
+	lp := shared.SqrtUInt64(n) + 1
 	primes := shared.GetPrimesUInt64(lp)
-	maxDiv := uint64(0)
 	for _, p := range primes {
-		if limit%p == uint64(0) && maxDiv < p {
+		if n%p == uint64(0) && maxDiv < p {
 			maxDiv = p
 		}
 	}
-	fmt.Println(maxDiv)
+	return maxDiv
+}
+
+func main() {
+	//fmt.Println(getLargestPrimeFactor(600851475143))
+	fmt.Println(getLargestPrimeFactor(42))
 }

@@ -25,18 +25,21 @@ func readInput(path string) ([]int, error) {
 	return nums, scanner.Err()
 }
 
-func main() {
+func adjacentProduct(numDigits int) (res int) {
 	nums, _ := readInput("input.txt")
-	//println(len(nums))
-	var s int
-	for h := 12; h < len(nums); h++ {
+	numDigits--
+	for h := numDigits; h < len(nums); h++ {
 		cs := 1
-		for _, i := range nums[h-12 : h+1] {
+		for _, i := range nums[h-numDigits : h+1] {
 			cs *= i
 		}
-		if s < cs {
-			s = cs
+		if res < cs {
+			res = cs
 		}
 	}
-	println(s)
+	return res
+}
+
+func main() {
+	println(adjacentProduct(13))
 }

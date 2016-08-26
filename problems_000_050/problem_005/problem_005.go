@@ -5,25 +5,11 @@ package main
 
 import "github.com/bbetov/euler/shared"
 
-func factorize(num int, primes []uint64) map[int]int {
-	rv := make(map[int]int)
-	for _, p := range primes {
-		for num > 1 && num%int(p) == 0 {
-			rv[int(p)]++
-			num /= int(p)
-		}
-		if num == 1 {
-			break
-		}
-	}
-	return rv
-}
-
-func evenlyDivisible(maxNum int) int {
+func evenlyDivisible(maxNum int) uint64 {
 	primes := shared.GetPrimesUInt64(uint64(maxNum))
-	nums := make(map[int]int)
+	nums := make(map[uint64]int)
 	for i := maxNum; i > 0; i-- {
-		f := factorize(i, primes)
+		f := shared.GetDivisorsFreqPrimesSet(uint64(i), primes)
 		for k, v := range f {
 			oldv := nums[k]
 			if oldv < v {
@@ -32,7 +18,7 @@ func evenlyDivisible(maxNum int) int {
 		}
 	}
 
-	rv := 1
+	rv := uint64(1)
 	for k, v := range nums {
 		for i := 0; i < v; i++ {
 			rv *= k

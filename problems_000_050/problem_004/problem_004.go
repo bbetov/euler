@@ -19,15 +19,18 @@ func isPalindrome(num int) bool {
 	return n == num
 }
 
-func main() {
-	maxPali := 0
-	for i := 1; i < 1000; i++ {
-		for j := 1; j < 1000; j++ {
+func getMaxPalindrome(lim int) (mp int) {
+	for i := 1; i < lim; i++ {
+		for j := 1; j < lim; j++ {
 			n := i * j
-			if isPalindrome(n) && n > maxPali {
-				maxPali = n
+			if isPalindrome(n) && n > mp {
+				mp = n
 			}
 		}
 	}
-	println(maxPali)
+	return mp
+}
+
+func main() {
+	println(getMaxPalindrome(1000))
 }

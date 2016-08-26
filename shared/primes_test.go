@@ -1,9 +1,6 @@
 package shared
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestSqrtUInt64(t *testing.T) {
 	var tests = []struct {
@@ -24,12 +21,4 @@ func TestSqrtUInt64(t *testing.T) {
 			t.Errorf("Expected sqrt(%v) to equal %v, but got %v", c.in, c.out, v)
 		}
 	}
-}
-
-func TestAtkin(t *testing.T) {
-	limit := uint64(600851475143)
-	lp := SqrtUInt64(limit)
-	primes := GetPrimesInt64(lp)
-
-	fmt.Println(primes)
 }
