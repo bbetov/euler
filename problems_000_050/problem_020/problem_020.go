@@ -7,14 +7,17 @@ import (
 )
 
 // Thou shalt not use big/Int
-func main() {
+func getSumDigitsFact(num int) uint64 {
 	r := shared.Integer{}
-	r.Set("2")
+	r.Set(strconv.Itoa(2))
 	tmp := shared.Integer{}
-	for i := 3; i <= 100; i++ {
+	for i := 3; i <= num; i++ {
 		tmp.Set(strconv.Itoa(i))
 		r.Multiply(&tmp)
 	}
-	println(r.SumDigits())
-	//println(r.String())
+	return r.SumDigits()
+}
+
+func main() {
+	println(getSumDigitsFact(100))
 }

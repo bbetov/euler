@@ -43,14 +43,17 @@ func numberInWords(num int) (s string) {
 	return s
 }
 
-func main() {
+func onetoThousandNumLetters() int {
 	var sum int
 	for i := 1; i <= 1000; i++ {
 		s := numberInWords(i)
-		//fmt.Printf("[%d] %s\n", i, s)
 		s = strings.Replace(s, " ", "", -1)
 
 		sum += len(s)
 	}
-	println(sum)
+	return sum
+}
+
+func main() {
+	println(onetoThousandNumLetters())
 }

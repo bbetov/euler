@@ -1,7 +1,5 @@
 package main
 
-// Bruteforced it ... I will worry about efficiency when I get to 67...
-
 import (
 	"bufio"
 	"os"

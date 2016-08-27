@@ -35,7 +35,7 @@ func numDaysInMonth(m, y int) (d int) {
 
 var days = []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
 
-func main() {
+func sundaysOnFirst() int {
 	// We know that Jan 1, 1900 was Monday (0)
 	// Our start date is Jan 1, 1901
 	d1 := numDaysInYear(1900)
@@ -51,5 +51,9 @@ func main() {
 			//fmt.Printf("%d 1, %d ==> %s", m+1, y, days[d1Off])
 		}
 	}
-	println(cnt)
+	return cnt
+}
+
+func main() {
+	println(sundaysOnFirst())
 }
