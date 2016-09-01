@@ -6,9 +6,8 @@ const (
 	maxK = uint64(10000)
 )
 
-func main() {
+func getAmicableSum() (sp uint64) {
 	dvsum := make(map[uint64]uint64)
-	var sp uint64
 	primes := shared.GetPrimesUInt64(maxK)
 
 	for k := uint64(1); k <= maxK; k++ {
@@ -30,5 +29,10 @@ func main() {
 		}
 	}
 
-	println(sp)
+	return sp
+}
+
+func main() {
+
+	println(getAmicableSum())
 }
