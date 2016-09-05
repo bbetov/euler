@@ -1,16 +1,14 @@
 package main
 
-var coins = []int{200, 100, 50, 20, 10, 5, 2, 1}
-
 // https://andrew.neitsch.ca/publications/m496pres1.nb.pdf
-func waysToSum(total, index int) int {
+func waysToSum(total, index int, coins []int) int {
 	if total < 0 || index < 0 {
 		return 0
 	}
 	if total == 0 {
 		return 1
 	}
-	return waysToSum(total, index-1) + waysToSum(total-coins[index], index)
+	return waysToSum(total, index-1, coins) + waysToSum(total-coins[index], index, coins)
 }
 
 func waysToSumBruteForce(total int) int {
@@ -36,7 +34,8 @@ func waysToSumBruteForce(total int) int {
 }
 
 func main() {
+	var coins = []int{200, 100, 50, 20, 10, 5, 2, 1}
 
-	println(waysToSum(200, len(coins)-1))
+	println(waysToSum(200, len(coins)-1, coins))
 	println(waysToSumBruteForce(200))
 }
