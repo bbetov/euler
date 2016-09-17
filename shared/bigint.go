@@ -98,3 +98,20 @@ func (ii *Integer) Multiply(m *Integer) {
 		ii.Add(&tmpi)
 	}
 }
+
+func (ii *Integer) IsPalindrome() bool {
+	digLen := len(ii.digits)
+	for i := 0; i < digLen/2; i++ {
+		if ii.digits[i] != ii.digits[digLen-1-i] {
+			return false
+		}
+	}
+	return true
+}
+
+func (ii *Integer) Reverse() {
+	digLen := len(ii.digits)
+	for i := 0; i < digLen/2; i++ {
+		ii.digits[i], ii.digits[digLen-1-i] = ii.digits[digLen-1-i], ii.digits[i]
+	}
+}
