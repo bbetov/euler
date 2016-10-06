@@ -89,7 +89,7 @@ func checkForSolution(st []map[uint64]uint32, i uint32, primes []uint64) (rv uin
 
 func main() {
 	var st []map[uint64]uint32
-	pr := primer.NewPrimer()
+	pr := primer.NewPrimerWithSegSize(10000000)
 	var primes []uint64
 	var prIndex uint32
 	var p uint64
