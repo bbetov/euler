@@ -37,10 +37,10 @@ func Heptagonal(index int) uint64 {
 		return 0
 	}
 	n := uint64(index)
-	return (n * (5*n - 1)) / 2
+	return (n * (5*n - 3)) / 2
 }
 
-func Oxagonal(index int) uint64 {
+func Octagonal(index int) uint64 {
 	if index <= 0 {
 		return 0
 	}
